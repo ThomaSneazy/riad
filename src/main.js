@@ -45,21 +45,23 @@ roomLinks.forEach(link => {
    const state = Flip.getState(link, {props: "width,height"});
    flipContainer.appendChild(link);
    
-   await Flip.from(state, {
-     duration: 1.2,
-     ease: "power3.inOut",
-     absolute: true,
-     width: '20rem',
-     height: '30rem'
-   });
+   // Animer le flip et le background en parallèle
+   await Promise.all([
+     Flip.from(state, {
+       duration: 1,
+       ease: "power3.inOut", 
+       absolute: true,
+       width: '20rem',
+       height: '30rem'
+     }),
+     gsap.to(transitionElement, {
+       backgroundColor: 'var(--beige)',
+       duration: 1,
+       ease: "power3.inOut"
+     })
+   ]);
    
-   gsap.to(transitionElement, {
-     backgroundColor: 'var(--beige)',
-     duration: 0.8,
-     onComplete: () => {
-       setTimeout(() => window.location.href = href, 100);
-     }
-   });
+   setTimeout(() => window.location.href = href, 10);
  });
 });
 
@@ -188,6 +190,10 @@ roomItems.forEach(item => {
    opacity: 0
  });
 
+ gsap.set(image, {
+   width: '50vw'
+ });
+
  item.addEventListener('mouseenter', () => {
    gsap.to(border, {
      x: -15,
@@ -197,7 +203,7 @@ roomItems.forEach(item => {
    });
 
    gsap.to(image, {
-     scale: 1.1,
+    //  width: '100vw',
      duration: 0.4,
      ease: 'power2.out'
    });
@@ -218,7 +224,7 @@ roomItems.forEach(item => {
    });
 
    gsap.to(image, {
-     scale: 1,
+    //  width: '50vw',
      duration: 0.4,
      ease: 'power2.inOut'
    });
@@ -229,6 +235,17 @@ roomItems.forEach(item => {
      ease: 'power2.inOut'
    });
  });
+
+ const link = item.querySelector('.room__link');
+ if (link) {
+   link.addEventListener('click', () => {
+     gsap.to(image, {
+       width: '100vw',
+       duration: 1.2,
+       ease: 'power3.inOut'
+     });
+   });
+ }
 });
 
 
