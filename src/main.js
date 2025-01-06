@@ -2,9 +2,9 @@ import './styles/style.css'
 import { gsap } from "gsap";
 import { Flip } from "gsap/Flip";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitType } from "split-type";
 
-gsap.registerPlugin(Flip,ScrollTrigger);
+gsap.registerPlugin(Flip);
+gsap.registerPlugin(ScrollTrigger);
 
 console.log(
     '%c Dev by Thomas Carré\n' + 
@@ -15,47 +15,6 @@ console.log(
     'background-color: #0b0b0b; color: #8B9A46; font-size:10px; padding:6px 10px 6px; border-radius:4px; line-height: 1.5;'
 )
 
-gsap.registerPlugin(ScrollTrigger);
-
-const fadeLines = document.querySelectorAll('[fade-line]');
-const fadeUpsContainers = document.querySelectorAll('[fade-up-container]');
-
-fadeLines.forEach(line => {
-  const splitText = new SplitType(line, { types: 'words, chars' });
-  
-  splitText.words.forEach(word => {
-    word.style.display = 'inline-block';
-  });
-  
-  gsap.from(splitText.chars, {
-    opacity: 0,
-    y: 10,
-    rotateX: -45,
-    stagger: 0.01,
-    duration: 0.6,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: line,
-      start: 'top 70%',
-    }
-  });
-});
-
-fadeUpsContainers.forEach(container => {
-  const fadeUpElements = container.querySelectorAll('[fade-up]');
-  
-  gsap.from(fadeUpElements, {
-    opacity: 0,
-    y: 10,
-    duration: 0.6,
-    stagger: 0.1,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: container,
-      start: 'top 60%',
-    }
-  });
-});
 
 
 
@@ -106,64 +65,79 @@ roomLinks.forEach(link => {
 
 
 
-const tl = gsap.timeline();
-gsap.set(['.entrez', '.respirez', '.laissez'], {
-  opacity: 0,
-  x: 10
-});
-gsap.set(['.heading-style-h1.is-1', '.heading-style-h1.is-2'], {
-  y: '100%',
-  skewY: 8
-});
+// const tl = gsap.timeline();
+// gsap.set(['.entrez', '.respirez', '.laissez'], {
+//   opacity: 0,
+//   x: 10
+// });
+// gsap.set(['.heading-style-h1.is-1', '.heading-style-h1.is-2'], {
+//   y: '100%',
+//   skewY: 8
+// });
 
-tl.to('.entrez', {
-  opacity: 1,
-  x: 0,
-  duration: 0.8,
-  ease: 'power2.out'
-})
-.to('.respirez', {
-  opacity: 1,
-  x: 0,
-  duration: 0.8,
-  ease: 'power2.out'
-}, '+=0.3')
-.to('.laissez', {
-  opacity: 1,
-  x: 0,
-  duration: 0.8,
-  ease: 'power2.out'
-}, '+=0.3')
-.to('.loader', {
-  opacity: 0,
-  duration: 0.8,
-  ease: 'power2.inOut',
-  onComplete: () => {
-    document.querySelector('.loader').style.display = 'none';
-  }
-}, '+=0.3')
-.to('.hero__wrapper', {
-  borderRadius: '0rem',
-  width: '100%',
-  height: '100%',
-  duration: 1.2,
-  ease: 'power3.inOut'
-})
-.to('.heading-style-h1.is-1', {
-  y: '0%',
-  skewY: 0,
-  opacity: 1,
-  duration: 1,
-  ease: 'power3.out'
-})
-.to('.heading-style-h1.is-2', {
-  y: '0%',
-  opacity: 1,
-  skewY: 0,
-  duration: 1,
-  ease: 'power3.out'
-}, '-=0.8');
+// gsap.set('.hero__wrapper', {
+//   borderTopLeftRadius: '20rem',
+//   borderTopRightRadius: '20rem',
+//   width: '20rem',
+//   height: '30rem'
+// });
 
+// gsap.set('.hero__wrapper img', {
+//   willChange: 'transform',
+//   backfaceVisibility: 'hidden',
+//   transform: 'translateZ(0)'
+// });
+
+// tl.to('.entrez', {
+//   opacity: 1,
+//   x: 0,
+//   duration: 0.8,
+//   ease: 'power2.out'
+// })
+// .to('.respirez', {
+//   opacity: 1,
+//   x: 0,
+//   duration: 0.8,
+//   ease: 'power2.out'
+// }, '+=0.3')
+// .to('.laissez', {
+//   opacity: 1,
+//   x: 0,
+//   duration: 0.8,
+//   ease: 'power2.out'
+// }, '+=0.3')
+// .to('.loader', {
+//   opacity: 0,
+//   duration: 0.8,
+//   ease: 'power2.inOut',
+//   onComplete: () => {
+//     document.querySelector('.loader').style.display = 'none';
+//   }
+// }, '+=0.3')
+// .to('.hero__wrapper', {
+//   borderTopLeftRadius: '0rem',
+//   borderTopRightRadius: '0rem',
+//   width: "100%",
+//   height: '100%',
+//   duration: 1.2,
+//   ease: 'power2.out',
+//   force3D: true,
+//   clearProps: 'transform'
+// })
+// .to('.heading-style-h1.is-1', {
+//   y: '0%',
+//   skewY: 0,
+//   opacity: 1,
+//   duration: 1,
+//   ease: 'power3.out'
+// })
+// .to('.heading-style-h1.is-2', {
+//   y: '0%',
+//   opacity: 1,
+//   skewY: 0,
+//   duration: 1,
+//   ease: 'power3.out'
+// }, '-=0.8');
 
 
 
@@ -263,15 +237,16 @@ gsap.set('.deco-img img', {
 });
 
 document.querySelectorAll('.deco-img').forEach(trigger => {
- gsap.to(trigger.querySelector('img'), {
-   scrollTrigger: {
-     trigger: trigger,
-     start: 'top center',
-     end: 'bottom center',
-     scrub: true
-   },
-   scale: 1,
-   ease: 'none'
+ ScrollTrigger.create({
+   trigger: trigger,
+   start: 'top center',
+   end: 'bottom center', 
+//    markers: true,
+   animation: gsap.to(trigger.querySelector('img'), {
+     scale: 1,
+     ease: 'none'
+   }),
+   scrub: true
  });
 });
 
