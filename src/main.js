@@ -45,7 +45,6 @@ roomLinks.forEach(link => {
    const state = Flip.getState(link, {props: "width,height"});
    flipContainer.appendChild(link);
    
-   // Animer le flip et le background en parallèle
    await Promise.all([
      Flip.from(state, {
        duration: 1,
