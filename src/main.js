@@ -24,6 +24,14 @@ roomLinks.forEach(link => {
  link.addEventListener('click', async (e) => {
    e.preventDefault();
    const href = link.getAttribute('href');
+   
+   // Vérifier la largeur de l'écran
+   if (window.innerWidth <= 991) {
+     // Redirection directe sans animation pour les petits écrans
+     window.location.href = href;
+     return;
+   }
+
    const flipContainer = document.querySelector('.room__item__flip');
    const transitionElement = document.querySelector('.transition-from-home');
    const roomItem = link.closest('.room__item');
