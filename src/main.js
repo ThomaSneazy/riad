@@ -198,7 +198,7 @@ roomItems.forEach(item => {
  });
 
  gsap.set(image, {
-   width: '50vw'
+  //  width: '50vw'
  });
 
  item.addEventListener('mouseenter', () => {
