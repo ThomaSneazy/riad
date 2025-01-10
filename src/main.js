@@ -266,3 +266,11 @@ document.querySelectorAll('.deco-img').forEach(trigger => {
  });
 });
 
+
+
+
+
+
+
+
+
