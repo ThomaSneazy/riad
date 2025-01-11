@@ -280,5 +280,141 @@ document.querySelectorAll('.deco-img').forEach(trigger => {
 
 
 
+document.querySelector('.button.menu').addEventListener('click', (e) => {
+  e.preventDefault();
 
+const menuWrapper = document.querySelector('.menu__wrapper');
+const menuLeft = document.querySelector('.menu__left');
+const menuRight = document.querySelector('.menu__right');
+const menuButton = document.querySelector('.button.menu');
+const navbar = document.querySelector('.navbar');
+const logo = document.querySelector('.logo');
 
+const isOpen = menuWrapper.style.display === 'flex';
+
+if (!isOpen) {
+  menuWrapper.style.display = 'flex';
+  menuButton.textContent = 'FERMER';
+  navbar.classList.remove('is-active');
+  menuButton.classList.add('is-black');
+  logo.classList.add('is-black');
+  
+  const tl = gsap.timeline();
+  
+  tl.to([menuLeft, menuRight], {
+    x: "0%",
+    duration: 1.4,
+    ease: 'power3.inOut',
+    onComplete: () => {
+      gsap.to('.button.is-menu-link', {
+        y: "0%",
+        skewY: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.inOut'
+      });
+      gsap.to('.menu__img__wrapper', {
+        rotation: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power3.inOut'
+      });
+      gsap.to('.line-menu', {
+        height: "100%",
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          gsap.to('.menu__link__socials', {
+            opacity: 1,
+            duration: 0.4,
+            ease: 'power3.inOut'
+          });
+        }
+      });
+    }
+  });
+  
+} else {
+  menuButton.textContent = 'MENU';
+  navbar.classList.add('is-active');
+  menuButton.classList.remove('is-black');
+      logo.classList.remove('is-black');
+  
+  gsap.to('.line-menu', {
+        height: "0%",
+        opacity: 1,
+        duration: 0.2,
+        ease: 'power3.inOut'
+  });
+  
+  gsap.to(menuLeft, {
+    x: "-100%",
+    duration: 1.4,
+    ease: 'power3.inOut'
+  });
+  
+  gsap.to(menuRight, {
+    x: "100%",
+    duration: 1.4,
+    ease: 'power3.inOut',
+    onComplete: () => {
+      
+      menuWrapper.style.display = 'none';
+      resetMenuAnimations();
+      
+    }
+  });
+}
+});
+
+const menuLinks = document.querySelectorAll('.button.is-menu-link');
+const menuImages = document.querySelectorAll('.img-menu');
+
+// Initial setup
+menuImages.forEach(img => {
+gsap.set(img, {
+  opacity: img.dataset.menu === 'home' ? 1 : 0
+});
+});
+
+menuLinks.forEach(link => {
+link.addEventListener('mouseenter', () => {
+  const menuId = link.dataset.menu;
+  
+  gsap.to(link, {
+    opacity: 0.5,
+    duration: 0.6
+  });
+
+  menuImages.forEach(img => {
+    if(img.dataset.menu === menuId) {
+      gsap.to(img, {
+        opacity: 1,
+        duration: 0.6
+      });
+    }
+  });
+});
+
+link.addEventListener('mouseleave', () => {
+  gsap.to(link, {
+    opacity: 1,
+    duration: 0.6
+  });
+  
+  const menuId = link.dataset.menu;
+  if(menuId !== 'home') {
+    menuImages.forEach(img => {
+      if(img.dataset.menu === menuId) {
+        gsap.to(img, {
+          opacity: 0,
+          duration: 0.6
+        });
+      }
+    });
+  }
+});
+});
