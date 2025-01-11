@@ -25,9 +25,7 @@ roomLinks.forEach(link => {
    e.preventDefault();
    const href = link.getAttribute('href');
    
-   // Vérifier la largeur de l'écran
    if (window.innerWidth <= 991) {
-     // Redirection directe sans animation pour les petits écrans
      window.location.href = href;
      return;
    }
