@@ -263,7 +263,6 @@ document.querySelectorAll('.deco-img').forEach(trigger => {
    trigger: trigger,
    start: 'top center',
    end: 'bottom center', 
-//    markers: true,
    animation: gsap.to(trigger.querySelector('img'), {
      scale: 1,
      ease: 'none'
