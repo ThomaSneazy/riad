@@ -44,7 +44,6 @@ roomLinks.forEach(link => {
      ease: 'power2.inOut'
    });
    
-   // Setup FLIP
    link.style.width = link.offsetWidth + 'px';
    link.style.height = link.offsetHeight + 'px';
    
