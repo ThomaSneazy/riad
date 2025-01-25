@@ -270,7 +270,7 @@ document.querySelectorAll('.deco-img').forEach(trigger => {
    scrub: true
  });
 });
-//dfd
+
 
 
 
