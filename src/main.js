@@ -4,11 +4,12 @@ import { Flip } from "gsap/Flip";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 
+
 gsap.registerPlugin(Flip);
 gsap.registerPlugin(ScrollTrigger);
 
 console.log(
-    '%c Dev by Thomas Carré\n' + 
+    '%c Dev by Thomas Carre\n' + 
     '🌐 Website: https://carre.studio.com\n' +
     '🐦 Twitter/X: https://x.com/ThomasCarre_' +
     '📸 Instagram: https://www.instagram.com/carre__studio/\n' +
