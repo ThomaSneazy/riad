@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(Flip);
 gsap.registerPlugin(ScrollTrigger);
 
+
 console.log(
     '%c Dev by Thomas Carre\n' + 
     '🌐 Website: https://carre.studio.com\n' +
